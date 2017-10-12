@@ -29,7 +29,7 @@ except:
 # -----------------------------------------------------------------------------
 # Cache functions
 # -----------------------------------------------------------------------------
-def has_cache_expired(timestamp_str):
+def has_cache_expired(timestamp_str, expire_in_days):
     """Check if cache timestamp is over expire_in_days old"""
     # gives current datetime
     now = datetime.now()
@@ -179,7 +179,7 @@ def load_articles_from_headlines_only(section_soup):
     stories = section_soup.find_all('li')
     for story_soup in stories:
         story_dict = {
-            'title': story_soup.find('h6').text.strip(),
+            'title': story_soup.find('h6').contents[0].text.strip(),
             'url': story_soup.find('a').get('href')
         }
 
